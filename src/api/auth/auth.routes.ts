@@ -1,8 +1,13 @@
-import { Request, Response, NextFunction } from 'express';
+import { NextFunction, Request, Response } from 'express';
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
+const {
+  findUserByEmail,
+  createUserByEmailAndPassword,
+  findUserById
+} = require('../users/users.services');
 const { generateTokens } = require('../../utils/jwt');
 const {
   addRefreshTokenToWhitelist,
@@ -10,13 +15,9 @@ const {
   deleteRefreshToken,
   revokeTokens
 } = require('./auth.services');
-const router = express.Router();
-const {
-  findUserByEmail,
-  createUserByEmailAndPassword,
-  findUserById
-} = require('../users/users.services');
 const { hashToken } = require('../../utils/hashToken');
+
+const router = express.Router();
 
 router.post('/register', async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -40,7 +41,7 @@ router.post('/register', async (req: Request, res: Response, next: NextFunction)
 
     res.json({
       accessToken,
-      refreshToken,
+      refreshToken
     });
   } catch (err) {
     next(err);

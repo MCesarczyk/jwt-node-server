@@ -13,6 +13,6 @@ router.get<{}, MessageResponse>('/', (req, res) => {
 
 router.use('/auth', auth);
 
-// router.use('/users', users);
+router.use('/users', users);
 
 export default router;
