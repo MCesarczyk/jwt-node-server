@@ -1,9 +1,8 @@
 import express from 'express';
-
 import MessageResponse from '../interfaces/MessageResponse';
-import emojis from './emojis';
 
 const router = express.Router();
+const auth = require('./auth/auth.routes');
 
 router.get<{}, MessageResponse>('/', (req, res) => {
   res.json({
@@ -11,6 +10,6 @@ router.get<{}, MessageResponse>('/', (req, res) => {
   });
 });
 
-router.use('/emojis', emojis);
+router.use('/auth', auth);
 
 export default router;
