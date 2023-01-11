@@ -3,6 +3,7 @@ import MessageResponse from '../interfaces/MessageResponse';
 
 const router = express.Router();
 const auth = require('./auth/auth.routes');
+const users = require('./users/users.routes');
 
 router.get<{}, MessageResponse>('/', (req, res) => {
   res.json({
@@ -11,5 +12,7 @@ router.get<{}, MessageResponse>('/', (req, res) => {
 });
 
 router.use('/auth', auth);
+
+// router.use('/users', users);
 
 export default router;
